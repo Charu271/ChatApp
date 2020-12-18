@@ -69,7 +69,7 @@ socket.on("roomData", ({ room, users }) => {
     room,
     users,
   });
-  $sidebar.insertAdjacentHTML("beforeend", html);
+  $sidebar.innerHTML = html;
 });
 $messageForm.addEventListener("submit", (e) => {
   e.preventDefault();

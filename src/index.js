@@ -29,10 +29,11 @@ io.on("connection", (socket) => {
     }
 
     socket.join(user.room);
-    socket.emit("roomData", {
+    io.to(user.room).emit("roomData", {
       room: user.room,
       users: getUsersInRoom(user.room),
     });
+
     socket.emit("message", messageGenerator("Admin", "Welcome!"));
     socket.broadcast
       .to(user.room)
@@ -79,7 +80,7 @@ io.on("connection", (socket) => {
         "message",
         messageGenerator("Admin", `${user.username} has left`)
       );
-      socket.emit("roomData", {
+      io.to(user.room).emit("roomData", {
         room: user.room,
         users: getUsersInRoom(user.room),
       });
